@@ -2,13 +2,6 @@
 import os
 import setuptools
 
-try:
-    import criteo_build
-
-    _CRITEO_BUILD = True
-except ImportError:
-    _CRITEO_BUILD = False
-
 with open(os.path.join(os.path.dirname(__file__), "README.md")) as readme:
     README = readme.read()
 
@@ -39,13 +32,11 @@ setup_common_args = {
     "packages": setuptools.find_packages(),
 }
 
-if _CRITEO_BUILD:
-    setuptools.setup(distclass=criteo_build.Distribution, **setup_common_args)
-else:
-    setuptools.setup(
-        name="sentry-exporter",
-        version="0.1",
-        description="Sentry metric exporter",
-        install_requires=_INSTALL_REQUIRES,
-        **setup_common_args,
-    )
+
+setuptools.setup(
+    name="sentry-exporter",
+    version="0.1",
+    description="Sentry metric exporter",
+    install_requires=_INSTALL_REQUIRES,
+    **setup_common_args,
+)
